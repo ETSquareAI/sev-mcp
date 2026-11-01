@@ -1,0 +1,50 @@
+{
+  "name": "@etsquare/sev-mcp",
+  "version": "0.1.4",
+  "mcpName": "io.github.ETSquareAI/sev",
+  "description": "Ask a research question in plain English and, in seconds, get a ranked shortlist of public companies, each with vetted original 10-K/10-Q passages and key reported financials: a few paragraphs per company instead of whole filings. Limit the search to tickers or SIC codes to pinpoint passages in specific companies' filings.",
+  "type": "module",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20.19"
+  },
+  "bin": {
+    "sev-mcp": "index.mjs"
+  },
+  "files": [
+    "index.mjs",
+    "client.mjs",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "test": "node --test test/*.test.mjs"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "1.32.1",
+    "zod": "3.25.76"
+  },
+  "author": "ETSquare AI, LLC",
+  "homepage": "https://etsquare.ai/build",
+  "bugs": {
+    "url": "https://etsquare.ai/support"
+  },
+  "keywords": [
+    "mcp",
+    "sec",
+    "edgar",
+    "company-discovery",
+    "claude",
+    "codex",
+    "sec-filings",
+    "10-k",
+    "10-q",
+    "financial-research",
+    "company-research",
+    "mcp-server"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  }
+}
