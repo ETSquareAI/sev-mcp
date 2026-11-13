@@ -9,7 +9,7 @@ const date=z.string().regex(/^\d{4}-\d{2}-\d{2}$/).refine(value=>{
   const d=new Date(value+'T00:00:00Z');return !Number.isNaN(d.getTime())&&d.toISOString().slice(0,10)===value&&value.slice(0,4)!=='0000';
 },'Use a real calendar date, YYYY-MM-DD.');
 const discovery=z.object({
-  question:z.string().trim().min(1).refine(s=>Array.from(s).length<=4000,'Maximum 4,000 characters.').describe('Natural-language SEC research question. Substantive alternatives and relationships matter.'),
+  question:z.string().trim().min(1).refine(s=>Array.from(s).length<=4000,'Maximum 4,000 characters.').describe("Natural-language SEC research question. Its requirements, relationships and substantive alternatives all matter. Matching depends on the words filings use. A question whose key concept is in everyday wording can keep that wording and add up to three common SEC-filing expressions as non-exhaustive examples, for instance \"customers switching to cheaper alternatives, such as trading down or moving to private label\". The examples illustrate the concept; they are not extra requirements or the only acceptable evidence. Questions already using specific filing terminology need no additions. The search follows the question as written: adding companies, causes, periods or outcomes that were not in the original question, or restating an actual event as a hypothetical risk, changes what is returned."),
   tickers:z.array(z.string().trim().toUpperCase().regex(/^[A-Z0-9][A-Z0-9.\-^/]{0,19}$/)).max(50).optional().describe('Explicit company universe. Alternative to sic_codes; never relaxed.'),
   sic_codes:z.array(z.string().regex(/^\d{4}$/)).max(50).optional().describe('Explicit four-digit industry codes, retaining leading zeroes. Alternative to tickers.'),
   filed_since:date.nullable().optional().describe('Inclusive SEC filing date. No hidden date default.'),
@@ -19,7 +19,7 @@ const source=z.object({passage_id:z.string().regex(/^[A-Fa-f0-9]{32}$/)}).strict
 const text=value=>({content:[{type:'text',text:JSON.stringify(value)}],structuredContent:value});
 
 export function createServer(client=new SevClient()) {
-  const server=new McpServer({name:'sev',version:'0.1.4'},{instructions:'SEV finds companies and original SEC passages worth investigating. Rankings indicate research relevance, not investment merit or proof of impact. Follow original sources. Do not automatically repeat a failed or uncertain discovery; it may already have used allowance. Use get_sec_passage for full text and adjacent context.'});
+  const server=new McpServer({name:'sev',version:'0.1.6'},{instructions:'SEV finds companies and original SEC passages worth investigating. Rankings indicate research relevance, not investment merit or proof of impact. Follow original sources. Do not automatically repeat a failed or uncertain discovery; it may already have used allowance. Use get_sec_passage for full text and adjacent context.'});
   const call=operation=>async(input,extra)=>{
     try{return text(await operation(input,extra.signal));}
     catch(error){const known=error instanceof ApiError;return {...text({status:'error',error:{code:known?error.code:'client_error',message:known?error.message:'The SEV client could not complete the request.'}}),isError:true};}

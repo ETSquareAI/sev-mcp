@@ -1,6 +1,6 @@
 {
   "name": "@etsquare/sev-mcp",
-  "version": "0.1.4",
+  "version": "0.1.6",
   "mcpName": "io.github.ETSquareAI/sev",
   "description": "Ask a research question in plain English and, in seconds, get a ranked shortlist of public companies, each with vetted original 10-K/10-Q passages and key reported financials: a few paragraphs per company instead of whole filings. Limit the search to tickers or SIC codes to pinpoint passages in specific companies' filings.",
   "type": "module",
@@ -46,5 +46,9 @@
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ETSquareAI/sev-mcp.git"
   }
 }
