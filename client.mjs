@@ -70,7 +70,7 @@ function publicFailure(value, status, request) {
 export class SevClient {
   #passageTail=Promise.resolve();
   constructor({baseURL=process.env.SEV_BASE_URL||'https://etsquare.ai', apiKey=process.env.SEV_API_KEY,
-               termsVersion=process.env.SEV_ACCEPT_TERMS_VERSION, fetchImpl=globalThis.fetch, timeout=20000}={}) {
+               termsVersion=process.env.SEV_ACCEPT_TERMS_VERSION, fetchImpl=globalThis.fetch, timeout=30000}={}) {
     const url=new URL(baseURL);
     const local=['localhost','127.0.0.1','[::1]'].includes(url.hostname);
     if ((url.protocol!=='https:'&&!(local&&url.protocol==='http:'))||url.username||url.password||url.search||url.hash||url.pathname!=='/')

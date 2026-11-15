@@ -19,7 +19,7 @@ const source=z.object({passage_id:z.string().regex(/^[A-Fa-f0-9]{32}$/)}).strict
 const text=value=>({content:[{type:'text',text:JSON.stringify(value)}],structuredContent:value});
 
 export function createServer(client=new SevClient()) {
-  const server=new McpServer({name:'sev',version:'0.1.6'},{instructions:'SEV finds companies and original SEC passages worth investigating. Rankings indicate research relevance, not investment merit or proof of impact. Follow original sources. Do not automatically repeat a failed or uncertain discovery; it may already have used allowance. Use get_sec_passage for full text and adjacent context.'});
+  const server=new McpServer({name:'sev',version:'0.1.7'},{instructions:'SEV finds companies and original SEC passages worth investigating. Rankings indicate research relevance, not investment merit or proof of impact. Follow original sources. Do not automatically repeat a failed or uncertain discovery; it may already have used allowance. Use get_sec_passage for full text and adjacent context.'});
   const call=operation=>async(input,extra)=>{
     try{return text(await operation(input,extra.signal));}
     catch(error){const known=error instanceof ApiError;return {...text({status:'error',error:{code:known?error.code:'client_error',message:known?error.message:'The SEV client could not complete the request.'}}),isError:true};}

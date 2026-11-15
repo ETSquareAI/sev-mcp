@@ -21,7 +21,7 @@ Add to ~/.codex/config.toml:
 command = "npx"
 args = ["-y","--prefer-online","@etsquare/sev-mcp@latest"]
 startup_timeout_sec = 30
-tool_timeout_sec = 25
+tool_timeout_sec = 35
 
 [mcp_servers.sev.env]
 SEV_BASE_URL = "https://etsquare.ai"
@@ -35,7 +35,7 @@ SEV_API_KEY = "YOUR_SEV_API_KEY"
 command = "cmd"
 args = ["/c","npx","-y","--prefer-online","@etsquare/sev-mcp@latest"]
 startup_timeout_sec = 30
-tool_timeout_sec = 25
+tool_timeout_sec = 35
 
 [mcp_servers.sev.env]
 SEV_BASE_URL = "https://etsquare.ai"
@@ -105,7 +105,7 @@ Your account's evaluation allowance is shared by Playground, REST and MCP. A suc
 
 This is a local stdio MCP client of the hosted REST service, not a remote /mcp endpoint. SEV_BASE_URL is the service origin; the default is https://etsquare.ai. Do not append /SEV or /mcp. HTTPS is required except loopback HTTP for local development. A key created on a local service does not authorize production.
 
-The client has a 20-second HTTP deadline and no automatic discovery retry. Codex's example allows 30 seconds for startup (including the first npm download) and 25 seconds per tool call. Those settings belong to Codex; do not add them to Claude Desktop JSON. These are timeout limits, not response-speed guarantees. A submitted request may finish on the server if the caller stops waiting.
+The client has a 30-second HTTP deadline and no automatic discovery retry. Codex's example allows 30 seconds for startup (including the first npm download) and 35 seconds per tool call. Those settings belong to Codex; do not add them to Claude Desktop JSON. These are timeout limits, not response-speed guarantees. A submitted request may finish on the server if the caller stops waiting.
 
 Keep your key private, including in MCP configuration. Revoke it from Account when no longer needed. An invalid configured key never falls back to anonymous access. The client does not write credentials or cached research results to disk. Protocol messages alone go to stdout.
 
